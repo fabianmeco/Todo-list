@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
       data=> {       
           this.overdueTasks=data;
         });
-    this.http.get<Task>('http://localhost:3000/task?pending=true').subscribe(
+    this.http.get<Task>('http://localhost:3000/task?overdue=false').subscribe(
       data=> {       
               this.pendingTasks=data;
     });

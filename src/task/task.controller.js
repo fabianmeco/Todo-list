@@ -27,8 +27,9 @@ exports.post = function (req, res) {
         })
 }
 
-exports.get = function(req, res){
-    return taskModel.findAll({})
+exports.get = function(req, res){    
+   
+    return taskModel.findAll(req.query.overdue==='true')
     .then(task => res.json(task))
     .catch(err => res.status(500).send([{name:"internal error", message: err.message}]));
 }

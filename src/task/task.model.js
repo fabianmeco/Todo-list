@@ -1,12 +1,20 @@
 const knex = require('../helper/knex');
+const moment = require('moment');
 const Tasks = {};
 
 Tasks.create = function(task){
     return knex('tasks').returning(['id','name','dueDate', 'priority', 'createdAt', 'updatedAt']).insert(task);
 }
 
-Tasks.findAll = function(query){
-    return knex.select('*').from('tasks').where(query);
+Tasks.findAll = function(overdue){
+   if(overdue){
+       console.log( knex.select('*').from('tasks').where('dueDate', '<', moment().format()).toString())
+        return knex.select('*').from('tasks').where('dueDate', '<', moment().format())
+    }else{
+        return knex.select('*').from('tasks').where('dueDate', '>=', moment().format())
+    }    
+    return knex.select('*').from('tasks');
+    
 }
 
 Tasks.find= function(query){
