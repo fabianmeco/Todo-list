@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="col-sm-4 col-sm-offset-1">
+    <ul class="list-group">
+        <!-- <button type="button" class="btn btn-success" action="onOrderName()">Name</button>     -->
+        <li *ngFor = "let task of overdueTasks" class="list-group-item"> {{task.name}} - {{task.dueDate}} - {{task.priority}}</li>
+    </ul>
+  </div>
+  <div class="col-sm-4 col-sm-offset-1">
+    <ul>
+        <li *ngFor = "let task of pendingTasks" class="list-group-item"> {{task.name}} - {{task.dueDate}} - {{task.priority}}</li>
+    </ul>
+  </div>
+</div>

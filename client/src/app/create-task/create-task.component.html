@@ -1,0 +1,64 @@
+<div class="container">
+  <p>
+      <ngb-alert *ngIf="showMessage" [type]="alertType" (close)="alertClose()">{{ message }}</ngb-alert>
+  </p>
+  <form (ngSubmit)="onSaveTask()" #createForm="ngForm">
+      <div class="row">
+          <div class="col-sm-4 col-sm-offset-1">
+              <label class="input-group" for="createname">
+                  <span class="input-group-addon" id="basic-addon1">
+                      <i class="fa fa-user-circle" aria-hidden="true"></i> Task Name</span>
+                  <input type="text" id="createname" name="name" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="task.name" required #name="ngModel" >                    
+              </label> 
+              <div *ngIf="name.invalid && (name.touched || createForm.submitted)" class="alert alert-danger">
+                  <div *ngIf="name.errors.serverError" >
+                      {{errors['name']}}
+                  </div>
+                  <div *ngIf="name.errors.required">
+                      The name is required to register a task
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-sm-offset-2">
+              <label class="input-group" for="createpriority">
+                  <span class="input-group-addon" id="basic-addon1">
+                      <i class="fa fa-id-card" aria-hidden="true"></i> Priority</span>
+                  <input type="number" id="createpriority" name="priority" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="task.priority" required #priority="ngModel" >                    
+              </label>
+              <div *ngIf="priority.invalid && (priority.touched || createForm.submitted)" class="alert alert-danger">
+                  <div *ngIf="priority.errors.serverError" >
+                      {{errors['priority']}}
+                  </div>
+                  <div *ngIf="priority.errors.required">
+                      The priority is required to register a task
+                  </div>
+              </div>              
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-4 col-sm-offset-1">
+              <label class="input-group" for="createduedate">
+                  <span class="input-group-addon" id="basic-addon1">
+                      <i class="fa fa-envelope" aria-hidden="true"></i> Due Date</span>
+                  <input type="date" id="createduedate" name="dueDate" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="task.dueDate"
+                      required #dueDate="ngModel" >                        
+              </label>
+              <div *ngIf="dueDate.invalid && (dueDate.touched || createForm.submitted)" class="alert alert-danger">
+                  <div *ngIf="dueDate.errors.serverError" >
+                      {{errors['dueDate']}}
+                  </div>
+                  <div *ngIf="dueDate.errors.required">
+                      The due date is required to register a task
+                  </div>                    
+              </div>
+          </div>          
+      </div>
+      <div class="row">
+          <div class="col-sm-3 col-sm-offset-5">
+              <div class="btn-group">
+                  <button type="submit" class="btn btn-success">Save New Task</button>                  
+              </div>
+          </div>
+      </div>
+  </form>
+</div>
